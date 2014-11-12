@@ -9,10 +9,13 @@
 from Tkinter import *
 root = Tk()
 drawpad = Canvas(root, width=800,height=600, background='white')
+rocket1 = drawpad.create_rectangle(400,585,405,590)
 player = drawpad.create_oval(390,580,410,600, fill="blue")
 enemy = drawpad.create_rectangle(50,50,100,60, fill="red")
+rocket1Fired = False
 
 direction = 5
+
 
 class myApp(object):
     def __init__(self, parent):
@@ -33,7 +36,7 @@ class myApp(object):
         self.rocketsTxt = Label(root, text=str(self.rockets), width=len(str(self.rockets)), bg='green')
         self.rocketsTxt.pack()
         
-        
+        self.rocketFired = False
         # Adding the drawpad, adding the key listener, starting animation
         drawpad.pack()
         root.bind_all('<Key>', self.key)
@@ -43,7 +46,11 @@ class myApp(object):
         global drawpad
         global enemy
         global direction
+        global rocket
+        global rocket1Fired
         x1,y1,x2,y2 = drawpad.coords(enemy)
+        px1,py1,px2,py2 = drawpad.coords(player)
+
         if x2 > 800:
             direction = - 5
         elif x1 < 0:
@@ -53,12 +60,13 @@ class myApp(object):
 
     def key(self,event):
         global player
+        global rocket1Fired
         if event.char == "w":
             drawpad.move(player,0,-4)
-        
-    def collisionDetect(self,rocket):
+            drawpad.move(rocket1,0,-4)
+            
+    
+    def collisionDetect(self, rocket):
         rx1,ry1,rx2,ry2 = drawpad.coords(rocket)
-        
-
 app = myApp(root)
 root.mainloop()
