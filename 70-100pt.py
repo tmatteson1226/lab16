@@ -4,7 +4,7 @@
 # 90pt -  When you hit space, fire a missile straight up! 
 #         Subtract from how many missiles you have left
 # 100pt - Destroy the target if a missile hits it! 
-# Hints: use drawpad.destroy(enemy) in the collision detect function, which you can trigger
+# Hints: use drawpad.delete(enemy) in the collision detect function, which you can trigger
 # from the key press event... maybe a loop to keep checking until the rocket goes out of bounds?
 from Tkinter import *
 root = Tk()
